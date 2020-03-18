@@ -1,0 +1,37 @@
+<div>
+  <h2>정치</h2>
+  <% @politics.each do |article| %>
+
+    <a href="<%= article.link %>"><h3><%= article.title %></h3></a>
+    <% article.histories.each do |history| %>
+      <% reply = history.reply %>
+      <a href="/replies/show/<%= reply.id %>"><%= reply.content %></a><br>
+      likes: <%= reply.histories.last.likes %><br>
+      hates: <%= reply.histories.last.hates %><br><br>
+    <% end %><br>
+  <% end %><hr>
+</div>
+
+<div>
+  <h2>경제</h2>
+  <% @economies.each do |article| %>
+    <a href="<%= article.link %>"><h3><%= article.title %></h3></a>
+    <% article.replies.each do |reply| %>
+      <a href="/replies/show/<%= reply.id %>"><%= reply.content %></a><br>
+      likes: <%= reply.histories.last.likes %><br>
+      hates: <%= reply.histories.last.hates %><br><br>
+    <% end %><br>
+  <% end %><hr>
+</div>
+
+<div>
+  <h2>사회</h2>
+  <% @societies.each do |article| %>
+    <a href="<%= article.link %>"><h3><%= article.title %></h3></a>
+    <% article.replies.each do |reply| %>
+      <a href="/replies/show/<%= reply.id %>"><%= reply.content %></a><br>
+      likes: <%= reply.histories.last.likes %><br>
+      hates: <%= reply.histories.last.hates %><br><br>
+    <% end %><br>
+  <% end %><hr>
+</div>

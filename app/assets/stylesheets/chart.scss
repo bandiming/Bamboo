@@ -1,0 +1,28 @@
+// Place all the styles related to the chart controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.Emoji {
+  height: 1.25em;
+  width: 1.25em;
+  padding: 0 .05em 0 .1em;
+  vertical-align: -0.2em;
+}
+
+.tweet-text {
+  white-space: pre-wrap;
+}
+.tweet .js-tweet-text {
+  white-space: pre-wrap;
+}
+.tweet p {
+  word-wrap: break-word;
+}
+
+.TweetTextSize {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+

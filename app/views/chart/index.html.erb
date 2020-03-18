@@ -1,0 +1,31 @@
+<%= render "chart_head" %>
+<div id="curve_chart"></div>
+
+
+<% @tweets.each do |r| %>
+  <%= r.date %><br>
+  <%= r.content.html_safe %><br><br>
+
+<% end %>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+            <%=raw @data %>
+        );
+
+        var options = {
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+

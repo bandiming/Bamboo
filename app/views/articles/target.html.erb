@@ -1,0 +1,13 @@
+<div>
+  <%= @articles.count %> articles
+  <% @articles.each do |article| %>
+
+    <a href="<%= article.link %>"><h3><%= article.title %></h3></a>
+    <% article.histories.each do |history| %>
+      <% reply = history.reply %>
+      <a href="/replies/show/<%= reply.id %>"><%= reply.content %></a><br>
+      likes: <%= reply.histories.last.likes %><br>
+      hates: <%= reply.histories.last.hates %><br><br>
+    <% end %><br>
+  <% end %><hr>
+</div>

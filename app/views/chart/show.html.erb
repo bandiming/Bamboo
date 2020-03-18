@@ -1,0 +1,43 @@
+<%= render "chart_head" %>
+<%= @tweet.reply.date %><br>
+<%= @tweet.reply.content %>
+<div class="flex">
+  <div id="like_chart"></div>
+  <div id="hate_chart"></div>
+</div>
+
+
+
+<% @tweets.each do |r| %>
+  <%= r.date %><br>
+  <%= r.content.html_safe %><br><br>
+
+<% end %>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var likes_data = google.visualization.arrayToDataTable(
+            <%=raw @likes %>
+        );
+        var hates_data = google.visualization.arrayToDataTable(
+            <%=raw @hates %>
+        );
+
+        var options = {
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            'width':400,
+            'height': 600
+        };
+
+        var like_chart = new google.visualization.ColumnChart(document.getElementById('like_chart'));
+        var hate_chart = new google.visualization.ColumnChart(document.getElementById('hate_chart'));
+        like_chart.draw(likes_data, options);
+        hate_chart.draw(hates_data, options);
+    }
+</script>
+
+

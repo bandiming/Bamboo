@@ -1,0 +1,34 @@
+<%= render "reply_head" %>
+<h2>댓글</h2>
+<%= @reply.date %><br>
+<%= @reply.content %>
+<div id="chart"></div>
+
+<h2>트윗</h2>
+<%= @tweets.count %> tweets
+<% @tweets.each do |tweet| %>
+  <%= tweet.date %><br>
+  <%= tweet.content.html_safe %><br><br>
+<% end %>
+
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+            <%=raw @data %>
+        );
+
+        var options = {
+            legend: { position: 'bottom' },
+            'width':400,
+            'height': 600
+        };
+
+        var chart = new google.charts.Line(document.getElementById('chart'));
+
+        chart.draw(data, options);
+    }
+</script>
