@@ -21,9 +21,10 @@ class Naver:
 
     def activate(self):
         try:
-            self.driver = webdriver.Chrome('')
+            self.driver = webdriver.Chrome('/Users/ichangmin/Drivers/chromedriver')
         except:
-            self.driver = webdriver.Chrome('')
+            self.driver = webdriver.Chrome('/Users/changmin/Drivers/chromedriver')
+
 
     @staticmethod
     def analyze_reply(article_link, reply):

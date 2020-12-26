@@ -18,9 +18,9 @@ class Twitter:
 
     def activate(self):
         try:
-            self.driver = webdriver.Chrome('')
+            self.driver = webdriver.Chrome('/Users/ichangmin/Drivers/chromedriver')
         except:
-            self.driver = webdriver.Chrome('')
+            self.driver = webdriver.Chrome('/Users/changmin/Drivers/chromedriver')
 
     @staticmethod
     def get_param_from_url(url, param):
