@@ -44,12 +44,12 @@ class Article:
         return cursor.fetchall()
 
     @staticmethod
-    def create(section, title, oid, aid, uid, date):
+    def create(section, title, oid, aid, uid, sid, date, article_time):
         # database.new_article(section, title, oid, aid, uid, date)
         cursor = db.cursor()
         created_at = now()
-        sql = "INSERT INTO articles (title, uid, aid, oid, section, date, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (title, uid, aid, oid, section, date, created_at, created_at)
+        sql = "INSERT INTO articles (title, uid, aid, oid, sid, section, date, time, created_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (title, uid, aid, oid, sid, section, date, article_time, created_at, created_at)
         cursor.execute(sql, val)
         db.commit()
 

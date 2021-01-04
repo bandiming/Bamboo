@@ -1,3 +1,4 @@
+# Xpath: https://www.guru99.com/xpath-selenium.html
 from selenium import webdriver
 import time
 from datetime import datetime
@@ -16,11 +17,38 @@ class Twitter:
         self.article_links = None
         self.new_tweets = []
 
+        self.xpath_name = None
+        self.xpath_user_id = None
+        self.xpath_content = None
+
     def activate(self):
         try:
-            self.driver = webdriver.Chrome('/Users/ichangmin/Drivers/chromedriver')
+            self.driver = webdriver.Chrome('/Users/ichangmin/driver/chromedriver')
         except:
             self.driver = webdriver.Chrome('/Users/changmin/Drivers/chromedriver')
+
+
+    # def update_xpaths(self):
+    #     # self.driver.find_elements_by_xpath("//*[contains(text(), 'My Button')]")
+    #     # print(self.driver.find_element_by_xpath("//*[text()='JM']").get_attribute("class"))
+
+    # def get_xpath():
+    # /html/body/div/div/div/div[2]/main/div/div/div/div/div/div[2]/div/section/div/div/div[1]/div/div/article/div/div/div/div[2]/div[2]/div/div/div/div[1]/a/div/div[1]/div[1]/span/span
+    # #react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div > div > div:nth-child(2) > div > section > div > div > div:nth-child(1) > div > div > article > div > div > div > div.css-1dbjc4n.r-18u37iz.r-d0pm55 > div.css-1dbjc4n.r-1iusvr4.r-16y2uox.r-1777fci > div > div > div > div.css-1dbjc4n.r-1wbh5a2.r-dnmrzs > a > div
+
+    def run(self):
+        # 1. reference tweet에서 class name 가져오기
+        #
+        #
+
+        self.driver.get("https://mobile.twitter.com/search?q=n.news.naver.com%2Farticle%2Fcomment%2F&src=typed_query&f=live")
+        class_name = self.driver.find_element_by_xpath("//*[text()='JM']").get_attribute("class")
+        print(class_name.replace(" ", "."))
+        elements = self.driver.find_elements_by_css_selector("span."+class_name.replace(" ", ".") + " > " + "span."+class_name.replace(" ", "."))
+        print(len(elements))
+        for e in elements:
+            print(e.text)
+
 
     @staticmethod
     def get_param_from_url(url, param):
@@ -49,6 +77,10 @@ class Twitter:
                 print("url none")
 
         return reply_data
+
+
+
+
 
     def get_tweets(self, test=False):
         self.article_links = []
@@ -90,32 +122,11 @@ class Twitter:
 
         return self.new_tweets
 
-    def get_best_replies(self, article_link):
-        self.driver.get(article_link)
-        time.sleep(1)
-        reply_boxes = self.driver.find_elements_by_class_name('u_cbox_comment')
-
-        for box in reply_boxes:
-
-            comment_no = box.get_attribute("data-info").split(',')[0].split(':')[1]
-            content = box.find_element_by_class_name('u_cbox_contents')
-            nickname = box.find_element_by_class_name('u_cbox_nick').text
-            date = box.find_element_by_class_name('u_cbox_date').text
-            like = box.find_element_by_class_name('u_cbox_cnt_recomm').text
-            unlike = box.find_element_by_class_name('u_cbox_cnt_unrecomm').text
-
 
     def quit(self):
         self.driver.quit()
 
 if __name__ == '__main__':
     twitter = Twitter()
-    # tweets = twitter.get_tweets(test=True)
-    # Tweet.create(tweets)
-    tweets = twitter.get_tweets()
-
-
-
-    # get_best_replies("https://news.naver.com/main/ranking/read.nhn?rankingType=popular_day&oid=001&aid=0011239718&date=20191127&type=1&rankingSectionId=100&rankingSeq=1")
-
+    twitter.run()
     twitter.quit()

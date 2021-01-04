@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191127090742) do
+ActiveRecord::Schema.define(version: 20201226145350) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20191127090742) do
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sid", default: ""
+    t.string "time", default: ""
   end
 
   create_table "histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -32,22 +34,22 @@ ActiveRecord::Schema.define(version: 20191127090742) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string "article_uid"
     t.string "comment_no"
-    t.text "content"
+    t.text "content", limit: 16777215
     t.string "nickname"
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tweets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tweets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string "comment_no"
     t.string "article_uid"
     t.string "tweet_uid"
     t.string "username"
-    t.text "content"
+    t.text "content", limit: 16777215
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
